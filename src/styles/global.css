@@ -58,6 +58,13 @@ code, .mono {
   font-family: var(--font-mono);
 }
 
+/* Shared token colors for the mockup panels' recreated terminal text */
+.tk-muted { color: var(--muted); }
+.tk-success { color: var(--success); }
+.tk-danger { color: var(--danger); }
+.tk-info { color: var(--info); }
+.tk-agent { color: var(--agent); }
+
 /* ---------- reveal-on-scroll ---------- */
 .reveal {
   opacity: 0;
