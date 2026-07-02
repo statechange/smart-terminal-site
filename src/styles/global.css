@@ -1,0 +1,149 @@
+/* Smart Terminal marketing site — "Warm Woody" palette, exact values from
+   the real app (src/lib/themes.ts). Do not substitute generic dev-tool blue. */
+:root {
+  --bg: #2a2018;
+  --sidebar: #211912;
+  --text: #ede0cf;
+  --muted: #b09a82;
+  --border: #473829;
+  --accent: #d59a4a;
+  --accent-fg: #241a10;
+  --accent-text: #e7b65a;
+  --success: #9ed17a;
+  --danger: #ff9d8a;
+  --info: #86b8e6;
+  --warning: #e7b65a;
+  --agent: #d7a3e0;
+
+  --surface: #352a20;
+  --surface-2: #3d3123;
+  --shadow-amber: 0 20px 60px -20px rgba(213, 154, 74, 0.35);
+  --font-mono: "JetBrains Mono", "SF Mono", "Menlo", ui-monospace, monospace;
+  --font-sans: "Inter", "Segoe UI", system-ui, -apple-system, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: radial-gradient(120% 100% at 50% -10%, #362a1c 0%, var(--bg) 45%, #1c150e 100%);
+  color: var(--text);
+  font-family: var(--font-sans);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+a {
+  color: inherit;
+}
+
+.wrap {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+code, .mono {
+  font-family: var(--font-mono);
+}
+
+/* ---------- reveal-on-scroll ---------- */
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+.reveal-delay-1 { transition-delay: 0.08s; }
+.reveal-delay-2 { transition-delay: 0.16s; }
+.reveal-delay-3 { transition-delay: 0.24s; }
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+/* ---------- buttons ---------- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 26px;
+  border-radius: 10px;
+  font-weight: 600;
+  font-size: 16px;
+  text-decoration: none;
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
+}
+.btn-primary {
+  background: linear-gradient(180deg, #e2a957 0%, var(--accent) 100%);
+  color: var(--accent-fg);
+  box-shadow: 0 8px 30px -8px rgba(213, 154, 74, 0.55), inset 0 1px 0 rgba(255,255,255,0.25);
+}
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 14px 36px -10px rgba(213, 154, 74, 0.7), inset 0 1px 0 rgba(255,255,255,0.3);
+}
+.btn-ghost {
+  background: transparent;
+  color: var(--text);
+  border-color: var(--border);
+}
+.btn-ghost:hover {
+  border-color: var(--accent-text);
+  color: var(--accent-text);
+}
+.btn-sub {
+  display: block;
+  margin-top: 10px;
+  font-size: 13px;
+  color: var(--muted);
+}
+
+/* ---------- section rhythm ---------- */
+section {
+  padding: 88px 0;
+  position: relative;
+}
+.section-eyebrow {
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--accent-text);
+  margin: 0 0 14px;
+}
+.section-title {
+  font-size: clamp(28px, 4vw, 42px);
+  font-weight: 800;
+  margin: 0 0 16px;
+  letter-spacing: -0.01em;
+}
+.section-sub {
+  font-size: 18px;
+  color: var(--muted);
+  max-width: 640px;
+  margin: 0 0 48px;
+}

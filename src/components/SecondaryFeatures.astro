@@ -1,0 +1,69 @@
+---
+const items = [
+  {
+    color: "var(--warning)",
+    title: "Integrated SFTP, drag &amp; drop",
+    body: "Browse the remote filesystem in a sidebar and drag files in either direction over the same SSH channel — no separate SFTP client, no re-auth.",
+    icon: `<path d="M4 7a2 2 0 0 1 2-2h4l2 2h6a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V7Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>`,
+  },
+  {
+    color: "var(--agent)",
+    title: "AI agent integration",
+    body: "Claude Code and Codex hooks run alongside your shell — agent-run commands land in real tmux scrollback, so nothing an agent does disappears when you disconnect.",
+    icon: `<path d="M12 3a3 3 0 0 1 3 3v1h1a3 3 0 0 1 3 3v6a3 3 0 0 1-3 3H8a3 3 0 0 1-3-3v-6a3 3 0 0 1 3-3h1V6a3 3 0 0 1 3-3Z" stroke="currentColor" stroke-width="1.8"/><circle cx="9.5" cy="13.5" r="1" fill="currentColor"/><circle cx="14.5" cy="13.5" r="1" fill="currentColor"/>`,
+  },
+  {
+    color: "var(--info)",
+    title: "macOS today",
+    body: "Shipping now for macOS on Apple Silicon, built as a native Tauri app — small footprint, fast startup, no Electron bloat.",
+    icon: `<rect x="4" y="4" width="16" height="12" rx="2" stroke="currentColor" stroke-width="1.8"/><path d="M9 20h6M12 16v4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>`,
+  },
+];
+---
+
+<section class="secondary">
+  <div class="wrap">
+    <div class="secondary-grid">
+      {items.map((item, i) => (
+        <div class={`sec-card reveal reveal-delay-${i + 1}`}>
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" style={`color:${item.color}`} set:html={item.icon} />
+          <h3 set:html={item.title} />
+          <p set:html={item.body} />
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .secondary {
+    padding-top: 0;
+    padding-bottom: 40px;
+  }
+  .secondary-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 22px;
+  }
+  @media (max-width: 860px) {
+    .secondary-grid { grid-template-columns: 1fr; }
+  }
+  .sec-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 24px;
+  }
+  .sec-card svg { margin-bottom: 14px; }
+  .sec-card h3 {
+    font-size: 16.5px;
+    margin: 0 0 8px;
+    font-weight: 700;
+  }
+  .sec-card p {
+    font-size: 14px;
+    color: var(--muted);
+    margin: 0;
+    line-height: 1.6;
+  }
+</style>

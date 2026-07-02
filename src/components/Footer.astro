@@ -1,0 +1,60 @@
+---
+import { RELEASE } from "../lib/release.ts";
+const year = new Date().getFullYear();
+---
+
+<footer class="site-footer">
+  <div class="wrap footer-inner">
+    <div class="footer-brand">
+      <span class="brand-mark mono">st_</span>
+      <span>Smart Terminal</span>
+    </div>
+    <nav class="footer-links">
+      <a href={RELEASE.dmgUrl}>Download (v{RELEASE.version})</a>
+      <a href="https://statechange.ai" target="_blank" rel="noopener noreferrer">State Change</a>
+    </nav>
+    <div class="footer-meta">© {year} State Change. macOS · Apple Silicon.</div>
+  </div>
+</footer>
+
+<style>
+  .site-footer {
+    border-top: 1px solid var(--border);
+    padding: 36px 0;
+    background: var(--sidebar);
+  }
+  .footer-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 18px;
+  }
+  .footer-brand {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 700;
+    color: var(--text);
+  }
+  .brand-mark {
+    color: var(--accent-text);
+    font-weight: 700;
+  }
+  .footer-links {
+    display: flex;
+    gap: 22px;
+  }
+  .footer-links a {
+    color: var(--muted);
+    text-decoration: none;
+    font-size: 14px;
+  }
+  .footer-links a:hover {
+    color: var(--accent-text);
+  }
+  .footer-meta {
+    color: var(--muted);
+    font-size: 13px;
+  }
+</style>

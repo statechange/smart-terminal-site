@@ -1,0 +1,70 @@
+---
+---
+
+<section class="showcase">
+  <div class="wrap">
+    <p class="section-eyebrow reveal">Straight from the app</p>
+    <h2 class="section-title reveal">Connect once, and it's yours from anywhere.</h2>
+    <p class="section-sub reveal">
+      Saved profiles, ProxyJump chains, and the option to wrap any connection
+      in its own tmux session — configured in one screen.
+    </p>
+
+    <div class="shot-frame reveal">
+      <div class="term-chrome">
+        <div class="term-dots">
+          <span style="background:#ff9d8a"></span>
+          <span style="background:#e7b65a"></span>
+          <span style="background:#9ed17a"></span>
+        </div>
+        <div class="term-title mono">Smart Terminal — Connect</div>
+      </div>
+      <img
+        src="/screenshots/connect-screen.png"
+        width="2400"
+        height="1600"
+        loading="lazy"
+        alt="Smart Terminal connect screen showing a saved SSH profile with a ProxyJump bastion-host checkbox and a 'Wrap in tmux session' option"
+      />
+    </div>
+  </div>
+</section>
+
+<style>
+  .showcase {
+    padding-top: 40px;
+  }
+  .shot-frame {
+    border-radius: 16px;
+    overflow: hidden;
+    border: 1px solid var(--border);
+    box-shadow: 0 40px 90px -30px rgba(0,0,0,0.65), var(--shadow-amber);
+    background: var(--sidebar);
+  }
+  .term-chrome {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 16px;
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+  }
+  .term-dots {
+    display: flex;
+    gap: 7px;
+  }
+  .term-dots span {
+    width: 11px;
+    height: 11px;
+    border-radius: 50%;
+    display: inline-block;
+  }
+  .term-title {
+    font-size: 12.5px;
+    color: var(--muted);
+  }
+  .shot-frame img {
+    width: 100%;
+    height: auto;
+  }
+</style>

@@ -1,0 +1,166 @@
+---
+---
+
+<section id="features" class="headline">
+  <div class="wrap">
+    <p class="section-eyebrow reveal">Why it's different</p>
+    <h2 class="section-title reveal">Built on the two things that actually matter over SSH.</h2>
+    <p class="section-sub reveal">
+      Everything else — panes, files, AI — sits on top of a session that
+      survives and a network path that reaches. Get those two wrong and
+      nothing else matters.
+    </p>
+
+    <div class="headline-grid">
+      <article class="headline-card reveal">
+        <div class="card-icon" style="color:var(--accent-text)">
+          <svg width="30" height="30" viewBox="0 0 24 24" fill="none">
+            <path d="M4 4v16M4 4h9a3 3 0 0 1 3 3v0a3 3 0 0 1-3 3H4m0 0h11a3 3 0 0 1 3 3v0a3 3 0 0 1-3 3H4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <span class="headline-tag">The core differentiator</span>
+        <h3>Real tmux control mode, not a reimplementation</h3>
+        <p>
+          Smart Terminal runs <code class="mono">tmux -CC</code> on the
+          remote and renders panes natively in the desktop UI. Your session
+          lives inside tmux itself — so it keeps running through laptop
+          sleep, network drops, VPN hiccups, and app crashes. Reconnect and
+          every pane, every scrollback line, every running process is
+          exactly as you left it. No SSH keep-alive tricks, no session
+          replay guesswork — the persistence is real because tmux's
+          persistence is real.
+        </p>
+        <ul class="headline-points">
+          <li>Survives sleep, disconnects, and app restarts</li>
+          <li>Native multi-pane rendering, not a dumb terminal in a box</li>
+          <li>Scrollback and running processes untouched on reconnect</li>
+        </ul>
+      </article>
+
+      <article class="headline-card reveal reveal-delay-1">
+        <div class="card-icon" style="color:var(--info)">
+          <svg width="30" height="30" viewBox="0 0 24 24" fill="none">
+            <circle cx="5" cy="12" r="2.6" stroke="currentColor" stroke-width="1.8"/>
+            <circle cx="12" cy="7" r="2.6" stroke="currentColor" stroke-width="1.8"/>
+            <circle cx="19" cy="12" r="2.6" stroke="currentColor" stroke-width="1.8"/>
+            <path d="M7.4 10.8 9.8 8.6M14.2 8.6l2.4 2.2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <span class="headline-tag" style="color:var(--info)">Reach anything</span>
+        <h3>ProxyJump &amp; bastion-host SSH, built in</h3>
+        <p>
+          Production boxes usually aren't directly reachable — they sit
+          behind a jump host. Smart Terminal treats multi-hop SSH as a
+          first-class connection type: configure a ProxyJump chain once and
+          each hop authenticates independently, exactly like your
+          <code class="mono">~/.ssh/config</code> already expects.
+        </p>
+        <ul class="headline-points">
+          <li>Chain through one or more bastion hosts</li>
+          <li>Independent auth per hop — no shared-key shortcuts</li>
+          <li>Same tmux persistence guarantees end-to-end</li>
+        </ul>
+      </article>
+    </div>
+  </div>
+</section>
+
+<style>
+  .headline {
+    background: var(--sidebar);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+  }
+  .headline-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 28px;
+  }
+  @media (max-width: 860px) {
+    .headline-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+  .headline-card {
+    background: linear-gradient(165deg, var(--surface) 0%, var(--bg) 100%);
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    padding: 36px 32px;
+    position: relative;
+    overflow: hidden;
+  }
+  .headline-card::after {
+    content: "";
+    position: absolute;
+    inset: -1px;
+    border-radius: 18px;
+    padding: 1px;
+    background: linear-gradient(160deg, rgba(213,154,74,0.5), transparent 40%);
+    -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
+  }
+  .card-icon {
+    width: 56px;
+    height: 56px;
+    border-radius: 14px;
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 22px;
+  }
+  .headline-tag {
+    display: inline-block;
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--accent-text);
+    margin-bottom: 10px;
+  }
+  .headline-card h3 {
+    font-size: 24px;
+    margin: 0 0 14px;
+    letter-spacing: -0.01em;
+  }
+  .headline-card p {
+    color: var(--muted);
+    font-size: 15.5px;
+    margin: 0 0 20px;
+  }
+  .headline-card code {
+    background: rgba(0,0,0,0.25);
+    border: 1px solid var(--border);
+    padding: 1px 6px;
+    border-radius: 5px;
+    font-size: 0.9em;
+    color: var(--accent-text);
+  }
+  .headline-points {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 10px;
+  }
+  .headline-points li {
+    font-size: 14.5px;
+    color: var(--text);
+    padding-left: 24px;
+    position: relative;
+  }
+  .headline-points li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 7px;
+    width: 8px;
+    height: 8px;
+    border-radius: 2px;
+    background: var(--accent);
+    transform: rotate(45deg);
+  }
+</style>
