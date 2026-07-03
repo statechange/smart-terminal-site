@@ -4,11 +4,11 @@
 <section id="features" class="headline">
   <div class="wrap">
     <p class="section-eyebrow reveal">Why it's different</p>
-    <h2 class="section-title reveal">Built on the two things that actually matter over SSH.</h2>
+    <h2 class="section-title reveal">Built for the way remote work actually happens.</h2>
     <p class="section-sub reveal">
-      Everything else — panes, files, AI — sits on top of a session that
-      survives and a network path that reaches. Get those two wrong and
-      nothing else matters.
+      A session that survives, an agent that can act inside it, and your
+      local dev ports reachable without thinking about it. Everything
+      else — panes, files, chrome — sits on top of these three.
     </p>
 
     <div class="headline-grid">
@@ -24,12 +24,10 @@
         <p>
           Smart Terminal runs <code class="mono">tmux -CC</code> on the
           remote and renders panes natively in the desktop UI. Your session
-          lives inside tmux itself — so it keeps running through laptop
-          sleep, network drops, VPN hiccups, and app crashes. Reconnect and
-          every pane, every scrollback line, every running process is
-          exactly as you left it. No SSH keep-alive tricks, no session
-          replay guesswork — the persistence is real because tmux's
-          persistence is real.
+          lives inside tmux itself, so it keeps running through sleep,
+          network drops, and app crashes. Reconnect and every pane,
+          every scrollback line, every running process is exactly as you
+          left it.
         </p>
         <ul class="headline-points">
           <li>Survives sleep, disconnects, and app restarts</li>
@@ -39,24 +37,50 @@
       </article>
 
       <article class="headline-card reveal reveal-delay-1">
-        <div class="card-icon" style="color:var(--info)">
+        <div class="card-icon" style="color:var(--agent)">
           <svg width="30" height="30" viewBox="0 0 24 24" fill="none">
-            <rect x="2.5" y="9.5" width="5" height="5" rx="1" stroke="currentColor" stroke-width="1.8"/>
-            <rect x="9.5" y="3" width="5" height="5" rx="1" stroke="currentColor" stroke-width="1.8"/>
-            <rect x="16.5" y="16" width="5" height="5" rx="1" stroke="currentColor" stroke-width="1.8"/>
-            <path d="M7.5 10.8 11 6.6M13.5 7.4 17.5 15.8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-dasharray="1 3.2"/>
-            <path d="M16.4 14.4l1.4 1.9-2.2 0.9" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M12 3a3 3 0 0 1 3 3v1h1a3 3 0 0 1 3 3v6a3 3 0 0 1-3 3H8a3 3 0 0 1-3-3v-6a3 3 0 0 1 3-3h1V6a3 3 0 0 1 3-3Z" stroke="currentColor" stroke-width="1.8"/>
+            <circle cx="9.5" cy="13.5" r="1" fill="currentColor"/>
+            <circle cx="14.5" cy="13.5" r="1" fill="currentColor"/>
           </svg>
         </div>
-        <span class="headline-tag" style="color:var(--info)">Reach anything</span>
-        <h3>ProxyJump &amp; bastion-host SSH, built in</h3>
+        <span class="headline-tag" style="color:var(--agent)">The point of the persistence</span>
+        <h3>An agent that lives in the terminal, not beside it</h3>
         <p>
-          Production boxes usually aren't directly reachable — they sit behind a jump host. Smart Terminal treats multi-hop SSH as a first-class connection type: configure a ProxyJump chain once and each hop authenticates independently, exactly like your <code class="mono">~/.ssh/config</code> already expects.
+          One input box, classified per line: plain shell or an instruction
+          to the agent. Agent-run commands execute as real commands in real
+          tmux scrollback — never a hidden side channel — so what the agent
+          did is still there after you reconnect, exactly like your own
+          history.
         </p>
         <ul class="headline-points">
-          <li>Chain through one or more bastion hosts</li>
-          <li>Independent auth per hop — no shared-key shortcuts</li>
-          <li>Same tmux persistence guarantees end-to-end</li>
+          <li>Type shell or ask the agent — same box, no mode switch</li>
+          <li>Agent commands land in tmux scrollback, not a separate log</li>
+          <li>Structured command blocks give it (and you) something to read</li>
+        </ul>
+      </article>
+
+      <article class="headline-card reveal reveal-delay-2">
+        <div class="card-icon" style="color:var(--info)">
+          <svg width="30" height="30" viewBox="0 0 24 24" fill="none">
+            <rect x="2.5" y="8" width="7" height="8" rx="1.5" stroke="currentColor" stroke-width="1.8"/>
+            <rect x="14.5" y="8" width="7" height="8" rx="1.5" stroke="currentColor" stroke-width="1.8"/>
+            <path d="M9.5 10.4h5M9.5 13.6h5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+            <path d="M12.4 9.5 14 10.4l-1.6 0.9M14.6 12.7l1.6 0.9-1.6 0.9" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <span class="headline-tag" style="color:var(--info)">Build remote, test local</span>
+        <h3>Port forwarding that finds itself</h3>
+        <p>
+          Start a dev server on the remote and Smart Terminal spots it in
+          the scrollback and offers to forward it — one click and it's live
+          at <code class="mono">localhost</code>. Forwards persist across
+          reconnects, so a tunnel you set up once just comes back.
+        </p>
+        <ul class="headline-points">
+          <li>Auto-detects dev-server ports as they come up</li>
+          <li>One click to forward back to a local port</li>
+          <li>Persisted tunnels reconnect automatically, no re-setup</li>
         </ul>
       </article>
     </div>
@@ -71,10 +95,15 @@
   }
   .headline-grid {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 28px;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
   }
-  @media (max-width: 860px) {
+  @media (max-width: 1100px) {
+    .headline-grid {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+  @media (max-width: 700px) {
     .headline-grid {
       grid-template-columns: 1fr;
     }
@@ -83,7 +112,7 @@
     background: linear-gradient(165deg, var(--surface) 0%, var(--bg) 100%);
     border: 1px solid var(--border);
     border-radius: 18px;
-    padding: 36px 32px;
+    padding: 30px 26px;
     position: relative;
     overflow: hidden;
   }

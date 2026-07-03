@@ -1,20 +1,22 @@
 ---
 const panels = [
-  { id: "blocks", label: "Block-primary mode" },
+  { id: "agent", label: "AI agent feed" },
+  { id: "blocks", label: "Command blocks" },
+  { id: "ports", label: "Port forwarding" },
   { id: "panes", label: "Native tmux panes" },
   { id: "sftp", label: "SFTP drag &amp; drop" },
-  { id: "agent", label: "AI agent feed" },
 ];
 ---
 
 <section class="mockups">
   <div class="wrap">
     <p class="section-eyebrow reveal">Inside the app</p>
-    <h2 class="section-title reveal">A terminal that renders like a modern app.</h2>
+    <h2 class="section-title reveal">An agent that reads your terminal like you do.</h2>
     <p class="section-sub reveal">
-      Every pane is real tmux underneath — but the chrome is a modern desktop app.
-      These panels are code-recreated mockups of app screens, drawn in the
-      exact app palette.
+      Every command runs as a structured block — input, output, exit code —
+      not a raw stream of characters. That's not decoration: it's what lets
+      the agent see exactly what happened and act on it, the same way you
+      would.
     </p>
 
     <div class="mock-tabs reveal" role="tablist">
@@ -24,13 +26,45 @@ const panels = [
     </div>
 
     <div class="mock-stage reveal">
-      <!-- Block-primary mode -->
-      <div class="mock-panel is-active" data-panel="blocks">
+      <!-- Agent feed -->
+      <div class="mock-panel is-active" data-panel="agent">
+        <div class="app-chrome">
+          <div class="term-chrome">
+            <div class="term-dots"><span style="background:#ff9d8a"></span><span style="background:#e7b65a"></span><span style="background:#9ed17a"></span></div>
+            <div class="term-title mono">cronmaster — agent feed</div>
+          </div>
+          <div class="agent-feed">
+            <div class="agent-msg">
+              <span class="agent-badge">agent</span>
+              <p>Checked out <code class="mono">fix/reconnect-race</code> and reran the failing suite — 2 tests fixed, 1 still red in <code class="mono">ssh::session</code>.</p>
+            </div>
+            <div class="agent-cmd mono">
+              <span class="tk-muted">$</span> cargo test session::reconnect -- --nocapture
+            </div>
+            <div class="agent-msg">
+              <span class="agent-badge">agent</span>
+              <p>Root cause: reconnect races the tmux control-mode handshake. Proposing a fix — want me to apply it?</p>
+            </div>
+            <div class="smart-input mono">
+              <span class="tk-muted">›</span>
+              <span class="typed-text">yes, apply and run tests again</span>
+              <span class="cursor-blink">▌</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Command blocks (the mechanism behind the agent feed) -->
+      <div class="mock-panel" data-panel="blocks">
         <div class="app-chrome">
           <div class="term-chrome">
             <div class="term-dots"><span style="background:#ff9d8a"></span><span style="background:#e7b65a"></span><span style="background:#9ed17a"></span></div>
             <div class="term-title mono">cronmaster — block mode</div>
           </div>
+          <p class="block-caption">
+            Every command becomes a block with its own input, output, and
+            exit code — the same structure the agent feed is reading from.
+          </p>
           <div class="block-list mono">
             <div class="cmd-block">
               <div class="block-head"><span class="status-dot ok"></span><span class="block-cmd">pnpm build</span><span class="block-time">4.2s</span></div>
@@ -118,30 +152,37 @@ const panels = [
         </div>
       </div>
 
-      <!-- Agent feed -->
-      <div class="mock-panel" data-panel="agent">
+      <!-- Port forwarding -->
+      <div class="mock-panel" data-panel="ports">
         <div class="app-chrome">
           <div class="term-chrome">
             <div class="term-dots"><span style="background:#ff9d8a"></span><span style="background:#e7b65a"></span><span style="background:#9ed17a"></span></div>
-            <div class="term-title mono">cronmaster — agent feed</div>
+            <div class="term-title mono">cronmaster — tunnels</div>
           </div>
-          <div class="agent-feed">
-            <div class="agent-msg">
-              <span class="agent-badge">agent</span>
-              <p>Checked out <code class="mono">fix/reconnect-race</code> and reran the failing suite — 2 tests fixed, 1 still red in <code class="mono">ssh::session</code>.</p>
+          <div class="tunnel-panel mono">
+            <div class="tunnel-offer">
+              <span class="tunnel-offer-icon">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M12 3v13m0 0-4.5-4.5M12 16l4.5-4.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </span>
+              <span class="tunnel-offer-text">Dev server detected on remote port <b>5173</b> — forward to localhost?</span>
+              <button class="tunnel-offer-btn">Forward</button>
             </div>
-            <div class="agent-cmd mono">
-              <span class="tk-muted">$</span> cargo test session::reconnect -- --nocapture
+            <div class="tunnel-row">
+              <span class="status-dot ok"></span>
+              <span class="tunnel-label">localhost:5173 → remote:5173</span>
+              <span class="tunnel-badge">pinned</span>
             </div>
-            <div class="agent-msg">
-              <span class="agent-badge">agent</span>
-              <p>Root cause: reconnect races the tmux control-mode handshake. Proposing a fix — want me to apply it?</p>
+            <div class="tunnel-row">
+              <span class="status-dot ok"></span>
+              <span class="tunnel-label">localhost:5433 → remote:5432</span>
+              <span class="tunnel-badge">pinned</span>
             </div>
-            <div class="smart-input mono">
-              <span class="tk-muted">›</span>
-              <span class="typed-text">yes, apply and run tests again</span>
-              <span class="cursor-blink">▌</span>
+            <div class="tunnel-row muted-row">
+              <span class="status-dot run"></span>
+              <span class="tunnel-label">remote:9229 → localhost:9229</span>
+              <span class="tunnel-badge ephemeral">this session</span>
             </div>
+            <p class="tunnel-note">Pinned tunnels reconnect automatically — nothing to redo after sleep or a dropped connection.</p>
           </div>
         </div>
       </div>
@@ -213,7 +254,14 @@ const panels = [
   .term-title { font-size: 12.5px; color: var(--muted); }
 
   /* Block-primary */
-  .block-list { padding: 18px; display: grid; gap: 12px; min-height: 380px; }
+  .block-caption {
+    margin: 0;
+    padding: 12px 18px 0;
+    font-size: 12.5px;
+    color: var(--muted);
+    line-height: 1.6;
+  }
+  .block-list { padding: 18px; display: grid; gap: 12px; min-height: 350px; }
   .cmd-block {
     background: var(--bg);
     border: 1px solid var(--border);
@@ -330,6 +378,57 @@ const panels = [
     font-size: 14px;
   }
   .typed-text { color: var(--text); }
+
+  /* Port forwarding */
+  .tunnel-panel { padding: 20px; display: flex; flex-direction: column; gap: 10px; min-height: 380px; }
+  .tunnel-offer {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: rgba(83, 184, 255, 0.08);
+    border: 1px solid rgba(83, 184, 255, 0.28);
+    border-radius: 10px;
+    padding: 12px 14px;
+    margin-bottom: 6px;
+  }
+  .tunnel-offer-icon { color: var(--info); flex: none; }
+  .tunnel-offer-text { flex: 1; font-size: 13.5px; color: var(--text); line-height: 1.5; }
+  .tunnel-offer-btn {
+    font-family: var(--font-sans);
+    font-size: 12.5px;
+    font-weight: 700;
+    color: var(--info);
+    background: rgba(83,184,255,0.14);
+    border: 1px solid rgba(83,184,255,0.4);
+    border-radius: 999px;
+    padding: 6px 14px;
+    flex: none;
+    cursor: default;
+  }
+  .tunnel-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 10px 14px;
+    font-size: 13.5px;
+  }
+  .tunnel-row.muted-row { opacity: 0.75; }
+  .tunnel-label { flex: 1; color: var(--text); }
+  .tunnel-badge {
+    font-size: 10.5px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--success);
+    background: rgba(158, 209, 122, 0.14);
+    border-radius: 999px;
+    padding: 3px 9px;
+  }
+  .tunnel-badge.ephemeral { color: var(--muted); background: rgba(255,255,255,0.06); }
+  .tunnel-note { margin: 10px 0 0; font-size: 12.5px; color: var(--muted); line-height: 1.6; }
 </style>
 
 <script>
